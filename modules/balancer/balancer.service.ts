@@ -31,16 +31,6 @@ export class BalancerService {
         return this.cachePools();
     }
 
-    /*public async getPastPools(): Promise<SubgraphPoolFragment[]> {
-        const cached = await cache.getObjectValue<SubgraphPoolFragment[]>(PAST_POOLS_CACHE_KEY);
-
-        if (cached) {
-            return cached;
-        }
-
-        return this.cachePastPools();
-    }*/
-
     public async cachePools(): Promise<SubgraphPoolFragment[]> {
         const { pools } = await this.sdk.subgraphClient.Pools({
             first: 1000,
@@ -69,6 +59,16 @@ export class BalancerService {
 
         return poolsWithOnChainBalances;
     }
+
+    /*public async getPastPools(): Promise<SubgraphPoolFragment[]> {
+        const cached = await cache.getObjectValue<SubgraphPoolFragment[]>(PAST_POOLS_CACHE_KEY);
+
+        if (cached) {
+            return cached;
+        }
+
+        return this.cachePastPools();
+    }*/
 
     /* public async cachePastPools(): Promise<SubgraphPoolFragment[]> {
         const block = await blocksSubgraphService.getBlockFrom24HoursAgo();
