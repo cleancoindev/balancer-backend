@@ -59,67 +59,6 @@ export class BalancerService {
 
         return poolsWithOnChainBalances;
     }
-
-    /*public async getPastPools(): Promise<SubgraphPoolFragment[]> {
-        const cached = await cache.getObjectValue<SubgraphPoolFragment[]>(PAST_POOLS_CACHE_KEY);
-
-        if (cached) {
-            return cached;
-        }
-
-        return this.cachePastPools();
-    }*/
-
-    /* public async cachePastPools(): Promise<SubgraphPoolFragment[]> {
-        const block = await blocksSubgraphService.getBlockFrom24HoursAgo();
-        const blacklistedPools = await this.getBlacklistedPools();
-        const pools = await balancerSubgraphService.getAllPools({
-            orderBy: Pool_OrderBy.TotalLiquidity,
-            orderDirection: OrderDirection.Desc,
-            block: { number: parseInt(block.number) },
-        });
-
-        const filtered = pools.filter((pool) => {
-            if (blacklistedPools.includes(pool.id)) {
-                return false;
-            }
-
-            if (parseFloat(pool.totalShares) < 0.01) {
-                return false;
-            }
-
-            return true;
-        });
-
-        await cache.putObjectValue(PAST_POOLS_CACHE_KEY, filtered);
-
-        return filtered;
-    }
-
-    public async getTopTradingPairs(): Promise<BalancerTradePairSnapshotFragment[]> {
-        const cached = await cache.getObjectValue<BalancerTradePairSnapshotFragment[]>(TOP_TRADE_PAIRS_CACHE_KEY);
-
-        if (cached) {
-            return cached;
-        }
-
-        return this.cacheTopTradingPairs();
-    }
-
-    public async cacheTopTradingPairs(): Promise<BalancerTradePairSnapshotFragment[]> {
-        const timestamp = moment().utc().startOf('day').unix();
-
-        const { tradePairSnapshots } = await balancerSubgraphService.getTradePairSnapshots({
-            first: 5,
-            orderBy: TradePairSnapshot_OrderBy.TotalSwapVolume,
-            orderDirection: OrderDirection.Desc,
-            where: { timestamp_gt: timestamp },
-        });
-
-        await cache.putObjectValue(TOP_TRADE_PAIRS_CACHE_KEY, tradePairSnapshots, oneDayInMinutes);
-
-        return tradePairSnapshots;
-    }*/
 }
 
 export const balancerService = new BalancerService();
