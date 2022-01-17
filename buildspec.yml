@@ -1,0 +1,22 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - yarn install
+  build:
+    commands:
+      - yarn generate
+      - yarn build
+  post_build:
+    commands:
+      - echo Build completed on `date`
+cache:
+  paths:
+    - 'node_modules/**/*'
+artifacts:
+  files:
+    - node_modules/**/*
+    - package.json
+    - dist/**/*
+    - Procfile
+    - cron.yaml

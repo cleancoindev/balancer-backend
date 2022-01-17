@@ -1,0 +1,9 @@
+.DS_Store
+.env.dev
+.env
+node_modules/
+
+schema.ts
+graphql_schema_generated.ts
+dist
+yarn-error.log

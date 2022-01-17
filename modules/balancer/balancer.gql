@@ -1,0 +1,102 @@
+extend type Query {
+    pools: [GqlBalancerPool!]!
+    #poolsPastPools: [GqlBalancerPool!]!
+    #latestPrice(id: ID!): GqlBalancerTokenLatestPrice
+    #poolSnapshots(poolId: ID!): [GqlBalancerPoolSnapshot!]!
+    #poolGet24hData(poolId: ID!): GqlBalancerPool24h!
+    #balancerGetTopTradingPairs: [GqlBalancerTradePairSnapshot!]!
+}
+
+extend type Mutation {
+    test: Boolean!
+}
+
+type GqlBalancerPool {
+    id: ID!
+    name: String
+    address: Bytes!
+    poolType: String
+    swapFee: BigDecimal!
+    totalShares: BigDecimal!
+    tokens: [GqlBalancerPoolToken!]!
+    tokensList: [Bytes!]!
+    totalWeight: BigDecimal
+    amp: BigInt
+    expiryTime: BigInt
+    unitSeconds: BigInt
+    principalToken: Bytes
+    baseToken: Bytes
+    swapEnabled: Boolean!
+
+    totalLiquidity: BigDecimal!
+    totalShares: BigDecimal!
+    totalSwapFee: BigDecimal!
+    totalSwapVolume: BigDecimal!
+    owner: Bytes
+    factory: Bytes
+    createTime: Int!
+}
+
+type GqlBalancerPoolToken {
+    id: ID!
+    address: String!
+    balance: BigDecimal!
+    decimals: Int!
+    weight: BigDecimal
+    priceRate: BigDecimal!
+    name: String!
+    symbol: String!
+}
+
+type GqlBalancerTokenLatestPrice {
+    asset: Bytes!
+    block: BigInt!
+    id: ID!
+    price: BigDecimal!
+    priceUSD: BigDecimal!
+    pricingAsset: Bytes!
+}
+
+type GqlBalancerPoolSnapshot {
+    id: ID!
+    poolId: ID!
+    totalShares: BigDecimal!
+    totalSwapVolume: BigDecimal!
+    totalSwapFee: BigDecimal!
+    totalLiquidity: BigDecimal!
+    timestamp: Int!
+    swapVolume24h: BigDecimal!
+    swapFees24h: BigDecimal!
+    liquidityChange24h: BigDecimal!
+    tokens: [GqlBalancerPoolToken!]!
+}
+
+type GqlBalancerTradePairSnapshot {
+    id: ID!
+    pair: GqlBalancerTradePair!
+    timestamp: Int!
+    totalSwapFee: BigDecimal!
+    totalSwapVolume: BigDecimal!
+}
+
+type GqlBalancerTradePairToken {
+    address: String!
+    symbol: String!
+}
+
+type GqlBalancerTradePair {
+    token0: GqlBalancerTradePairToken!
+    token1: GqlBalancerTradePairToken!
+}
+
+type GqlBalancerPool24h {
+    id: ID!
+    address: Bytes!
+    totalShares: BigDecimal!
+    totalSwapVolume: BigDecimal!
+    totalSwapFee: BigDecimal!
+    totalLiquidity: BigDecimal!
+    swapVolume24h: BigDecimal!
+    swapFees24h: BigDecimal!
+    liquidityChange24h: BigDecimal!
+}
