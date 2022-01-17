@@ -2,7 +2,6 @@ import { blocksSubgraphService } from '../blocks-subgraph/blocks-subgraph.servic
 import { getOnChainBalances } from './src/onchainData';
 import { providers } from 'ethers';
 import { env } from '../../app/env';
-import { BALANCER_NETWORK_CONFIG } from './src/contracts';
 import moment from 'moment-timezone';
 import { parseInt } from 'lodash';
 import { cache } from '../cache/cache';
@@ -61,8 +60,8 @@ export class BalancerService {
     private async cachePoolOnChainBalances(pools: SubgraphPoolFragment[]): Promise<SubgraphPoolFragment[]> {
         const poolsWithOnChainBalances = await getOnChainBalances(
             pools,
-            BALANCER_NETWORK_CONFIG[`${env.CHAIN_ID}`].multicall,
-            BALANCER_NETWORK_CONFIG[`${env.CHAIN_ID}`].vault,
+            this.sdk.network.multicall,
+            this.sdk.network.vault,
             this.provider,
         );
 
