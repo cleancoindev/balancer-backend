@@ -17,7 +17,7 @@
         "@balancer-labs/sdk": "github:beethovenxfi/balancer-sdk#daniel/balancer-backend",
         "@graphql-tools/load-files": "^6.5.2",
         "@graphql-tools/merge": "^8.2.1",
-        "apollo-server-core": "^3.5.0",
+        "apollo-server-core": "^3.11.0",
         "apollo-server-express": "^3.5.0",
         "axios": "^0.24.0",
         "decimal.js": "^10.3.1",
